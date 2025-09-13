@@ -3,8 +3,6 @@ kind: Kustomization
 resources:
   - ./common/namespaces
   - ./infra/helm-repositories
-  - ./apps/infra/metallb/config
-  - ./apps/infra/metallb/release
   - ./ingress-nginx
   - ./monitoring
   - ./mysql
