@@ -4,7 +4,7 @@ metadata:
   name: mysql
   namespace: default
 spec:
-  interval: 5m
+  releaseName: mysql
   chart:
     spec:
       chart: mysql
@@ -13,6 +13,12 @@ spec:
         kind: HelmRepository
         name: bitnami
         namespace: flux-system
+  interval: 1m
   values:
     auth:
-      existingSecret: wp-mysql-auth
+      existingSecret: mysql-secret   # secret defined in secret-mysql.yaml
+      database: wordpress
+      username: wordpress
+    primary:
+      persistence:
+        enabled: false   # disable persistence for simplicity (no storageClass issues)

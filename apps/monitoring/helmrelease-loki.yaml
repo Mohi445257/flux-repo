@@ -4,7 +4,7 @@ metadata:
   name: loki
   namespace: monitoring
 spec:
-  interval: 5m
+  releaseName: loki
   chart:
     spec:
       chart: loki
@@ -13,3 +13,7 @@ spec:
         kind: HelmRepository
         name: grafana
         namespace: flux-system
+  interval: 1m
+  values:
+    persistence:
+      enabled: false   # avoids PVC issues

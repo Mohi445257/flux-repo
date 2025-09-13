@@ -4,7 +4,7 @@ metadata:
   name: promtail
   namespace: monitoring
 spec:
-  interval: 5m
+  releaseName: promtail
   chart:
     spec:
       chart: promtail
@@ -13,3 +13,7 @@ spec:
         kind: HelmRepository
         name: grafana
         namespace: flux-system
+  interval: 1m
+  values:
+    config:
+      lokiAddress: http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push

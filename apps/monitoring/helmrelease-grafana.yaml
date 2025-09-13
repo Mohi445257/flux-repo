@@ -1,26 +1,24 @@
-apiVersion: helm.toolkit.fluxcd.io/v2
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: grafana
   namespace: monitoring
 spec:
-  interval: 5m
+  releaseName: grafana
   chart:
     spec:
       chart: grafana
       version: 6.59.4
       sourceRef:
         kind: HelmRepository
-        name: grafana
+        name: bitnami
         namespace: flux-system
+  interval: 1m
   values:
-    adminUser: admin
-    adminPassword: admin123   # You can encrypt this later with SOPS if you want
+    adminPassword: admin123
     ingress:
       enabled: true
-      ingressClassName: nginx
       hosts:
-        - name: grafana.local
-          paths:
-            - path: /
-              pathType: ImplementationSpecific
+        - grafana.local   # fixed: only strings allowed
+    persistence:
+      enabled: false
