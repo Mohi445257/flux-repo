@@ -2,10 +2,10 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: metallb
-  namespace: flux-system     # must be flux-system
+  namespace: flux-system     # Flux watches here
 spec:
   interval: 5m
-  targetNamespace: metallb-system   # where MetalLB will be installed
+  targetNamespace: metallb-system   # MetalLB will be installed here
   install:
     createNamespace: true
   chart:
