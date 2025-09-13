@@ -23,7 +23,7 @@ spec:
         default: true
       ingressClassByName: true
 
-      # ✅ Mount our Lua plugin from ConfigMap
+      # ✅ Mount our Lua plugin ConfigMap into NGINX plugins dir
       extraVolumes:
         - name: custom-lua-plugins
           configMap:
