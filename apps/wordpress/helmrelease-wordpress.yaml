@@ -8,32 +8,18 @@ spec:
   chart:
     spec:
       chart: wordpress
-      version: 15.2.33
+      version: 15.2.21
       sourceRef:
         kind: HelmRepository
         name: bitnami
         namespace: flux-system
   interval: 1m
   values:
-    wordpressUsername: user
-    wordpressPassword: changeme
-    wordpressEmail: user@example.com
-    wordpressFirstName: User
-    wordpressLastName: Example
-    wordpressBlogName: "My Blog"
-
     mariadb:
       enabled: false   # ✅ disable bundled MariaDB
-
     externalDatabase:
       host: mysql.default.svc.cluster.local
-      user: wordpress              # ✅ matches mysql-secret
-      password: ""                 # ✅ empty, pulled from existingSecret
-      database: wordpress          # ✅ matches mysql-secret
-      existingSecret: mysql-secret # ✅ same secret used by MySQL
-
-    ingress:
-      enabled: true
-      hostname: app.local
-      ingressClassName: nginx
-      tls: []   # configure later if needed
+      user: wordpress
+      database: wordpress
+      existingSecret: mysql-secret   # ✅ matches MySQL
+      password: ""                   # ✅ comes from secret
