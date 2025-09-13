@@ -1,4 +1,4 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: wordpress
@@ -15,11 +15,14 @@ spec:
         namespace: flux-system
   interval: 1m
   values:
+    wordpressUsername: admin
+    wordpressPassword: ""                # leave blank → comes from secret
+    existingSecret: mysql-secret         # ✅ tell WordPress to use mysql-secret
     mariadb:
-      enabled: false   # ✅ disable bundled MariaDB
+      enabled: false                     # ✅ we already run MySQL separately
     externalDatabase:
       host: mysql.default.svc.cluster.local
       user: wordpress
+      password: ""                       # leave blank → comes from secret
       database: wordpress
-      existingSecret: mysql-secret   # ✅ use your secret
-      password: ""                   # ✅ pulls from secret
+      existingSecret: mysql-secret       # ✅ reuse same secret
