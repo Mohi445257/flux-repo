@@ -4,6 +4,7 @@ metadata:
   name: mysql
   namespace: default
 spec:
+  releaseName: mysql
   chart:
     spec:
       chart: mysql
@@ -15,5 +16,8 @@ spec:
   interval: 1m
   values:
     auth:
-      existingSecret: mysql-secret   # ✅ ensure this points to your secret
-      database: wordpress            # database name
+      existingSecret: mysql-secret    # ✅ use your secret
+      rootPassword: ""                # leave blank → pulled from existingSecret
+      username: wordpress             # DB user (must match secret)
+      password: ""                    # leave blank → pulled from existingSecret
+      database: wordpress             # DB name for WordPress
