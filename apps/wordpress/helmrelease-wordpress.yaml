@@ -21,5 +21,5 @@ spec:
       host: mysql.default.svc.cluster.local
       user: wordpress
       database: wordpress
-      existingSecret: mysql-secret   # ✅ matches MySQL
-      password: ""                   # ✅ comes from secret
+      existingSecret: mysql-secret   # ✅ use your secret
+      password: ""                   # ✅ pulls from secret
