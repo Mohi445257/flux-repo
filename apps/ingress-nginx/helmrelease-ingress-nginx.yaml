@@ -23,7 +23,7 @@ spec:
         default: true
       ingressClassByName: true
 
-      # ✅ Mount our custom lua plugin
+      # ✅ Mount our Lua plugin from ConfigMap
       extraVolumes:
         - name: custom-lua-plugins
           configMap:
@@ -33,9 +33,3 @@ spec:
           mountPath: /etc/nginx/lua/plugins/redirect-404-plugin.lua
           subPath: redirect-404-plugin.lua
           readOnly: true
-
-      # optional metrics
-      metrics:
-        enabled: true
-        serviceMonitor:
-          enabled: true
