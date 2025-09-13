@@ -5,10 +5,12 @@ metadata:
   namespace: ingress-nginx
 spec:
   interval: 5m
+  install:
+    createNamespace: true
   chart:
     spec:
       chart: ingress-nginx
-      version: 4.11.7
+      version: "4.11.7"
       sourceRef:
         kind: HelmRepository
         name: ingress-nginx
@@ -17,16 +19,19 @@ spec:
     controller:
       service:
         type: LoadBalancer
+      admissionWebhooks:
+        enabled: true
+        patch:
+          enabled: true
       config:
-        plugins: "redirect_404"
+        lua-shared-dicts: "plugins:10"
+        lua-package-path: "/etc/nginx/lua/plugins/?.lua"
+        http-snippet: |
+          lua_package_path "/etc/nginx/lua/plugins/?.lua;;";
       extraVolumes:
-      - name: lua-plugins
-        configMap:
-          name: ingress-nginx-lua-plugins
-          items:
-          - key: redirect_404.lua
-            path: redirect_404.lua
+        - name: lua-plugins
+          configMap:
+            name: ingress-nginx-lua-plugins
       extraVolumeMounts:
-      - name: lua-plugins
-        mountPath: /etc/nginx/lua/plugins
-        readOnly: true
+        - name: lua-plugins
+          mountPath: /etc/nginx/lua/plugins

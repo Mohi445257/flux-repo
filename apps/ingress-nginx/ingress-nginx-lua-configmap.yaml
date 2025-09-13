@@ -4,7 +4,7 @@ metadata:
   name: ingress-nginx-lua-plugins
   namespace: ingress-nginx
 data:
-  redirect_404.lua: |
+  redirect-404-plugin.lua: |
     local _M = {}
 
     function _M.header_filter()
