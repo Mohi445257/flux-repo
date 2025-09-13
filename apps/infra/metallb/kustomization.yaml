@@ -4,4 +4,3 @@ resources:
   - metallb-helmrepo.yaml
   - helmrelease-metallb.yaml
   - metallb-config.yaml
-
