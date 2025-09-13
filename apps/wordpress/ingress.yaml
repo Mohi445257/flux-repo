@@ -3,12 +3,9 @@ kind: Ingress
 metadata:
   name: wordpress
   namespace: default
-  labels:
-    app.kubernetes.io/name: wordpress
-    app.kubernetes.io/instance: wordpress
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/plugins: redirect-404-plugin   # ✅ activate Lua plugin
+    nginx.ingress.kubernetes.io/plugins: redirect-404-plugin
 spec:
   rules:
     - host: wordpress.local
