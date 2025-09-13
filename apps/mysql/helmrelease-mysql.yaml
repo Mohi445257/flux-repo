@@ -16,9 +16,11 @@ spec:
   interval: 1m
   values:
     auth:
-      existingSecret: mysql-secret   # must match secret-mysql.yaml
+      existingSecret: mysql-secret
       database: wordpress
       username: wordpress
+      rootPassword: ""   # required by Bitnami chart, will be taken from secret
+      password: ""       # taken from secret
     primary:
       persistence:
-        enabled: false   # disable PVCs for now to avoid storage issues
+        enabled: false
