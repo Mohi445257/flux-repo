@@ -1,4 +1,4 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: grafana
@@ -14,12 +14,13 @@ spec:
         name: grafana
         namespace: flux-system
   values:
-    adminPassword: admin123
+    adminUser: admin
+    adminPassword: admin123   # You can encrypt this later with SOPS if you want
     ingress:
       enabled: true
       ingressClassName: nginx
       hosts:
-      - host: app-monitor.local
-        paths:
-        - path: /
-          pathType: Prefix
+        - name: grafana.local
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
