@@ -4,7 +4,6 @@ metadata:
   name: wordpress
   namespace: default
 spec:
-  releaseName: wordpress
   chart:
     spec:
       chart: wordpress
@@ -16,12 +15,18 @@ spec:
   interval: 1m
   values:
     wordpressUsername: admin
-    wordpressPassword: ""                   # from Secret
-    existingSecret: mysql-secret            # 👈 use our custom secret
+    wordpressPassword: wp-pass-123
     mariadb:
-      enabled: false                        # 👈 disable bundled MariaDB
+      enabled: false
     externalDatabase:
-      host: mysql.default.svc.cluster.local # 👈 MySQL service
-      user: wordpress                       # from Secret
-      password: ""                          # from Secret (mariadb-password)
-      database: wordpress                   # DB name
+      host: mysql.default.svc.cluster.local
+      user: wordpress
+      password: wp-pass-123
+      database: wordpress
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      hostname: wordpress.local
+      annotations:
+        kubernetes.io/ingress.class: nginx
+      tls: false
