@@ -16,9 +16,9 @@ spec:
   interval: 1m
   values:
     auth:
-      existingSecret: mysql-secret   # secret defined in secret-mysql.yaml
+      existingSecret: mysql-secret   # must match secret-mysql.yaml
       database: wordpress
       username: wordpress
     primary:
       persistence:
-        enabled: false   # disable persistence for simplicity (no storageClass issues)
+        enabled: false   # disable PVCs for now to avoid storage issues
