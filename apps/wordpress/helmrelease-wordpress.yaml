@@ -23,16 +23,17 @@ spec:
     wordpressBlogName: "My Blog"
 
     mariadb:
-      enabled: false   # disable built-in mariadb, we use external mysql
+      enabled: false   # disable the bundled MariaDB
+
     externalDatabase:
       host: mysql.default.svc.cluster.local
       user: wordpress
-      password: ""          # taken from existingSecret
+      password: ""              # leave empty → pulled from existingSecret
       database: wordpress
-      existingSecret: mysql-secret   # must match secret-mysql.yaml
+      existingSecret: mysql-secret   # must match your apps/mysql/secret-mysql.yaml
 
     ingress:
       enabled: true
       hostname: app.local
       ingressClassName: nginx
-      tls: []  # can be configured later
+      tls: []  # configure later if you want HTTPS

@@ -4,7 +4,6 @@ metadata:
   name: mysql
   namespace: default
 spec:
-  releaseName: mysql
   chart:
     spec:
       chart: mysql
@@ -16,11 +15,5 @@ spec:
   interval: 1m
   values:
     auth:
-      existingSecret: mysql-secret
-      database: wordpress
-      username: wordpress
-      rootPassword: ""   # required by Bitnami chart, will be taken from secret
-      password: ""       # taken from secret
-    primary:
-      persistence:
-        enabled: false
+      existingSecret: mysql-secret   # ✅ ensure this points to your secret
+      database: wordpress            # database name
