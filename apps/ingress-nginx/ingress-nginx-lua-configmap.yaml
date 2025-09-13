@@ -5,12 +5,11 @@ metadata:
   namespace: ingress-nginx
 data:
   redirect-404-plugin.lua: |
-    local _M = {}
-
-    function _M.header_filter()
-      if ngx.status == ngx.HTTP_NOT_FOUND then
-        return ngx.redirect("https://www.google.com", ngx.HTTP_MOVED_TEMPORARILY)
-      end
+    -- Redirect 404s to /
+    local function handle_not_found()
+      ngx.status = ngx.HTTP_MOVED_TEMPORARILY
+      ngx.header["Location"] = "/"
+      return ngx.exit(ngx.HTTP_MOVED_TEMPORARILY)
     end
 
-    return _M
+    return handle_not_found()
