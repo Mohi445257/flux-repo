@@ -5,7 +5,8 @@ metadata:
   namespace: default
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/plugins: redirect-404-plugin
+    nginx.ingress.kubernetes.io/plugins: |
+      redirect-404-plugin
 spec:
   rules:
     - host: wordpress.local
