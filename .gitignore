@@ -1,3 +1,2 @@
 # Ignore local kubeconfig files
 *.kube/config
-*config
