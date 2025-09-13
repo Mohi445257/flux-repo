@@ -5,6 +5,7 @@ metadata:
   namespace: default
 spec:
   releaseName: wordpress
+  interval: 1m
   chart:
     spec:
       chart: wordpress
@@ -13,16 +14,17 @@ spec:
         kind: HelmRepository
         name: bitnami
         namespace: flux-system
-  interval: 1m
   values:
     wordpressUsername: admin
-    wordpressPassword: ""                # leave blank → comes from secret
-    existingSecret: mysql-secret         # ✅ tell WordPress to use mysql-secret
+    wordpressPassword: ""             # taken from mysql-secret
+    existingSecret: mysql-secret      # ✅ point to unified secret
     mariadb:
-      enabled: false                     # ✅ we already run MySQL separately
+      enabled: false                  # ✅ don’t install MariaDB
     externalDatabase:
       host: mysql.default.svc.cluster.local
       user: wordpress
-      password: ""                       # leave blank → comes from secret
+      password: ""                    # taken from mysql-secret
       database: wordpress
-      existingSecret: mysql-secret       # ✅ reuse same secret
+      existingSecret: mysql-secret
+    service:
+      type: LoadBalancer

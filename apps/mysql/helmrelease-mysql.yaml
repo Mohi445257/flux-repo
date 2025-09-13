@@ -1,10 +1,11 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: mysql
   namespace: default
 spec:
   releaseName: mysql
+  interval: 1m
   chart:
     spec:
       chart: mysql
@@ -13,11 +14,14 @@ spec:
         kind: HelmRepository
         name: bitnami
         namespace: flux-system
-  interval: 1m
   values:
     auth:
-      existingSecret: mysql-secret   # ✅ ensure MySQL uses your secret
-      rootPassword: ""               # leave blank → comes from secret
-      username: wordpress            # same as in mysql-secret
-      password: ""                   # leave blank → comes from secret
-      database: wordpress            # DB name
+      existingSecret: mysql-secret   # ✅ Use unified secret
+      rootPassword: ""               # taken from mysql-secret
+      username: wordpress            # app user
+      password: ""                   # taken from mysql-secret
+      database: wordpress            # db name
+    primary:
+      persistence:
+        enabled: true
+        size: 1Gi
