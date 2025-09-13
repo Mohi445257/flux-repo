@@ -4,7 +4,7 @@ metadata:
   name: wordpress
   namespace: default
 spec:
-  interval: 5m
+  releaseName: wordpress
   chart:
     spec:
       chart: wordpress
@@ -13,13 +13,26 @@ spec:
         kind: HelmRepository
         name: bitnami
         namespace: flux-system
+  interval: 1m
   values:
-    wordpressUsername: admin
-    existingSecret: wp-mysql-auth
+    wordpressUsername: user
+    wordpressPassword: changeme
+    wordpressEmail: user@example.com
+    wordpressFirstName: User
+    wordpressLastName: Example
+    wordpressBlogName: "My Blog"
+
     mariadb:
-      enabled: false
+      enabled: false   # disable built-in mariadb, we use external mysql
     externalDatabase:
       host: mysql.default.svc.cluster.local
       user: wordpress
-      password: mywordpresspass
+      password: ""          # taken from existingSecret
       database: wordpress
+      existingSecret: mysql-secret   # must match secret-mysql.yaml
+
+    ingress:
+      enabled: true
+      hostname: app.local
+      ingressClassName: nginx
+      tls: []  # can be configured later
