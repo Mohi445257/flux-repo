@@ -5,26 +5,23 @@ metadata:
   namespace: default
 spec:
   releaseName: wordpress
-  interval: 1m
   chart:
     spec:
       chart: wordpress
-      version: 15.2.21
+      version: 15.2.33
       sourceRef:
         kind: HelmRepository
         name: bitnami
         namespace: flux-system
+  interval: 1m
   values:
     wordpressUsername: admin
-    wordpressPassword: ""             # taken from mysql-secret
-    existingSecret: mysql-secret      # ✅ point to unified secret
+    wordpressPassword: ""                   # from Secret
+    existingSecret: mysql-secret            # 👈 use our custom secret
     mariadb:
-      enabled: false                  # ✅ don’t install MariaDB
+      enabled: false                        # 👈 disable bundled MariaDB
     externalDatabase:
-      host: mysql.default.svc.cluster.local
-      user: wordpress
-      password: ""                    # taken from mysql-secret
-      database: wordpress
-      existingSecret: mysql-secret
-    service:
-      type: LoadBalancer
+      host: mysql.default.svc.cluster.local # 👈 MySQL service
+      user: wordpress                       # from Secret
+      password: ""                          # from Secret (mariadb-password)
+      database: wordpress                   # DB name
