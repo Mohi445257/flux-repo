@@ -24,6 +24,6 @@ spec:
             name: ingress-nginx-lua-configmap
       extraVolumeMounts:
         - name: redirect-404-plugin
-          mountPath: /etc/nginx/lua/plugins/redirect-404-plugin/main.lua
-          subPath: main.lua
+          mountPath: /etc/nginx/lua/plugins/redirect-404-plugin/handler.lua
+          subPath: handler.lua
           readOnly: true

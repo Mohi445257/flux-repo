@@ -4,7 +4,7 @@ metadata:
   name: ingress-nginx-lua-configmap
   namespace: ingress-nginx
 data:
-  main.lua: |
+  handler.lua: |
     local _M = {}
 
     function _M.header_filter()
