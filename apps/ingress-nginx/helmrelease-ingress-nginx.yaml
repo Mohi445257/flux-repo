@@ -4,24 +4,34 @@ metadata:
   name: ingress-nginx
   namespace: ingress-nginx
 spec:
+  interval: 5m
   releaseName: ingress-nginx
   chart:
     spec:
       chart: ingress-nginx
-      version: 4.7.1   # adjust to the version you are using
+      version: 4.7.0
       sourceRef:
         kind: HelmRepository
         name: ingress-nginx
         namespace: flux-system
-  interval: 1m
   values:
     controller:
+      replicaCount: 2
+      ingressClassResource:
+        name: nginx
+        enabled: true
+        default: true
+
+      # ✅ Extra Lua plugin volume & mount
       extraVolumes:
-        - name: custom-lua-plugins
+        - name: redirect-404-plugin
           configMap:
             name: ingress-nginx-lua-configmap
       extraVolumeMounts:
-        - name: custom-lua-plugins
-          mountPath: /etc/nginx/lua/plugins/redirect-404-plugin.lua
-          subPath: redirect-404-plugin.lua
+        - name: redirect-404-plugin
+          mountPath: /etc/nginx/lua/plugins/redirect-404-plugin/main.lua
+          subPath: main.lua
           readOnly: true
+
+      service:
+        type: LoadBalancer

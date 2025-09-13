@@ -4,11 +4,14 @@ metadata:
   name: ingress-nginx-lua-configmap
   namespace: ingress-nginx
 data:
-  redirect-404-plugin.lua: |
+  main.lua: |
     local _M = {}
+
     function _M.header_filter()
       if ngx.status == ngx.HTTP_NOT_FOUND then
+        ngx.log(ngx.ERR, "[redirect-404-plugin] Intercepted 404 -> redirecting to https://www.google.com")
         return ngx.redirect("https://www.google.com", ngx.HTTP_MOVED_TEMPORARILY)
       end
     end
+
     return _M
