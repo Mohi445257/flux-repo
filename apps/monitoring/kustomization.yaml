@@ -11,6 +11,6 @@ resources:
   - helmrelease-promtail.yaml
 
   # Grafana Operator-managed resources (temporarily disabled until CRDs are ready)
-  - grafana-instance.yaml
-  - grafana-datasource.yaml
-  - dashboards/wordpress-logs.yaml
+  # - grafana-instance.yaml
+  # - grafana-datasource.yaml
+  # - dashboards/wordpress-logs.yaml
