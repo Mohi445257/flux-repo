@@ -5,5 +5,3 @@ resources:
   - grafana-datasource.yaml
   - datasource-loki.yaml
   - dashboards/
-annotations:
-  kustomize.toolkit.fluxcd.io/depends-on: "operator"
