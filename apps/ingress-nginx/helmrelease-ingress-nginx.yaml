@@ -18,9 +18,12 @@ spec:
     controller:
       service:
         type: LoadBalancer
+      # lua plugin configuration
       config:
-        lua-shared-dicts: "cache:10m"
-        plugins: "redirect-404"
+        lua-shared-dicts: "plugins:10m"
+        # register the plugin name (must match the configmap key filename without .lua)
+        plugins: "redirect_404"
+      # mount the configmap into the controller pod
       extraVolumes:
         - name: lua-plugins
           configMap:
@@ -28,3 +31,4 @@ spec:
       extraVolumeMounts:
         - name: lua-plugins
           mountPath: /etc/nginx/lua/plugins
+          readOnly: true

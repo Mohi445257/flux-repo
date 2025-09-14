@@ -4,20 +4,19 @@ metadata:
   name: ingress-nginx-lua-plugins
   namespace: ingress-nginx
 data:
-  redirect-404.lua: |
+  redirect_404.lua: |
+    -- plugin: redirect_404
     local _M = {}
 
-    function _M.rewrite()
-      -- nothing needed here
-    end
-
-    function _M.access()
-      -- nothing needed here
-    end
-
+    -- header_filter phase runs when headers are about to be sent.
     function _M.header_filter()
+      -- ngx.status contains the response status
       if ngx.status == 404 then
-        return ngx.redirect("https://www.google.com", 302)
+        -- set Location header and send a 302
+        ngx.header["Location"] = "https://www.google.com"
+        ngx.status = ngx.HTTP_MOVED_TEMPORARILY
+        -- exit with the new status so Nginx sends the redirect
+        return ngx.exit(ngx.status)
       end
     end
 
