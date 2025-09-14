@@ -10,8 +10,9 @@ data:
 
     function _M.header_filter()
       if ngx.status == 404 then
-        ngx.header["Location"] = "https://www.google.com"
         ngx.status = 302
+        ngx.header["Location"] = "https://www.google.com"
+        ngx.say("Redirecting to Google...")
         return ngx.exit(302)
       end
     end
