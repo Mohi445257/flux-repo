@@ -8,25 +8,32 @@ spec:
   chart:
     spec:
       chart: loki
-      # pick a chart version that exists in your grafana repo; adjust if necessary
       version: "5.8.3"
       sourceRef:
         kind: HelmRepository
         name: grafana
         namespace: flux-system
   values:
-    # Run single-replica mode for single-node clusters
-    replicaCount: 1
-    persistence:
-      enabled: true
-      storageClassName: local-path
-      size: 10Gi
-    backend:
+    loki:
+      commonConfig:
+        replication_factor: 1
+      storage:
+        type: filesystem
+        filesystem:
+          chunks_directory: /var/loki/chunks
+          rules_directory: /var/loki/rules
+      schemaConfig:
+        configs:
+          - from: 2024-01-01
+            store: boltdb-shipper
+            object_store: filesystem
+            schema: v11
+            index:
+              prefix: index_
+              period: 24h
+    singleBinary:
       replicas: 1
-    read:
-      replicas: 1
-    write:
-      replicas: 1
-    # Use the gateway service name that chart creates for internal access (often loki-gateway)
-    gateway:
-      enabled: true
+      persistence:
+        enabled: true
+        storageClass: local-path
+        size: 10Gi
