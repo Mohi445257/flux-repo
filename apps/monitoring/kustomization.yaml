@@ -10,8 +10,7 @@ resources:
   # Promtail log forwarder
   - helmrelease-promtail.yaml
 
-  # Grafana Operator-managed resources
-  - grafana-instance.yaml
-  - grafana-datasource.yaml
-  - dashboards/wordpress-logs.yaml
-
+  # Grafana Operator-managed resources (temporarily disabled until CRDs are ready)
+  # - grafana-instance.yaml
+  # - grafana-datasource.yaml
+  # - dashboards/wordpress-logs.yaml

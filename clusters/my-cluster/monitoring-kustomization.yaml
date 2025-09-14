@@ -13,3 +13,4 @@ spec:
   targetNamespace: monitoring
   dependsOn:
     - name: apps
+    - name: helm-repositories
