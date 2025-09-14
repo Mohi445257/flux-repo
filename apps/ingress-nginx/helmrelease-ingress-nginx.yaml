@@ -21,12 +21,13 @@ spec:
       config:
         lua-shared-dicts: "plugins:10m"
         plugins: "redirect_404"
-        enable-lua-plugins: "true"   # 🔑 ensures plugins are actually executed
+        enable-lua-plugins: "true"
       extraVolumes:
         - name: lua-plugins
           configMap:
             name: ingress-nginx-lua-plugins
       extraVolumeMounts:
         - name: lua-plugins
-          mountPath: /etc/nginx/lua/plugins
+          mountPath: /etc/nginx/lua/plugins/redirect_404/main.lua
+          subPath: main.lua
           readOnly: true
