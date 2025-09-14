@@ -11,6 +11,6 @@ spec:
     kind: GitRepository
     name: flux-system
   dependsOn:
-    - name: helm-repositories   # makes sure helm repos exist before applying
+    - name: helm-repositories
   wait: true
   timeout: 5m
