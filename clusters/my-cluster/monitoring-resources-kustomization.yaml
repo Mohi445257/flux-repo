@@ -4,7 +4,7 @@ metadata:
   name: monitoring-resources
   namespace: flux-system
 spec:
-  interval: 5m
+  interval: 10m
   path: ./apps-disabled/monitoring/resources
   prune: true
   sourceRef:
@@ -12,5 +12,4 @@ spec:
     name: flux-system
   dependsOn:
     - name: monitoring-operator
-  wait: true
-  timeout: 5m
+  timeout: 2m

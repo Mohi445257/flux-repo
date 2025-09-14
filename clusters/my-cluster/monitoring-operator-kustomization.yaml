@@ -4,13 +4,10 @@ metadata:
   name: monitoring-operator
   namespace: flux-system
 spec:
-  interval: 5m
+  interval: 10m
   path: ./apps-disabled/monitoring/operator
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
-  dependsOn:
-    - name: helm-repositories
-  wait: true
-  timeout: 5m
+  timeout: 2m
