@@ -19,11 +19,9 @@ spec:
       service:
         type: LoadBalancer
       config:
-        # Allocate some memory for Lua shared dicts
         lua-shared-dicts: "plugins:10m"
-        # Enable our custom Lua plugin (must match filename without .lua)
         plugins: "redirect_404"
-        enable-lua-plugins: "true"
+        enable-lua-plugins: "true"   # 🔑 ensures plugins are actually executed
       extraVolumes:
         - name: lua-plugins
           configMap:
