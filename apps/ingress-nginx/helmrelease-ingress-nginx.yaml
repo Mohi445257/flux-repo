@@ -23,6 +23,7 @@ spec:
         lua-shared-dicts: "plugins:10m"
         # Enable our custom Lua plugin (must match filename without .lua)
         plugins: "redirect_404"
+        enable-lua-plugins: "true"
       extraVolumes:
         - name: lua-plugins
           configMap:
