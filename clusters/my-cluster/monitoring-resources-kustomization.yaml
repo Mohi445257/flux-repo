@@ -1,16 +1,16 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: monitoring
+  name: monitoring-resources
   namespace: flux-system
 spec:
-  interval: 1m
-  path: ./apps-disabled/monitoring
+  interval: 5m
+  path: ./apps-disabled/monitoring/resources
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
   dependsOn:
-    - name: helm-repositories
+    - name: monitoring-operator
   wait: true
   timeout: 5m
