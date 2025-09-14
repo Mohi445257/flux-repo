@@ -18,12 +18,11 @@ spec:
     controller:
       service:
         type: LoadBalancer
-      # lua plugin configuration
       config:
+        # Allocate some memory for Lua shared dicts
         lua-shared-dicts: "plugins:10m"
-        # register the plugin name (must match the configmap key filename without .lua)
+        # Enable our custom Lua plugin (must match filename without .lua)
         plugins: "redirect_404"
-      # mount the configmap into the controller pod
       extraVolumes:
         - name: lua-plugins
           configMap:

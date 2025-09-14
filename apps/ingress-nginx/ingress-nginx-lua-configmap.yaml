@@ -5,18 +5,14 @@ metadata:
   namespace: ingress-nginx
 data:
   redirect_404.lua: |
-    -- plugin: redirect_404
+    -- Custom plugin to redirect all 404 responses to Google
     local _M = {}
 
-    -- header_filter phase runs when headers are about to be sent.
     function _M.header_filter()
-      -- ngx.status contains the response status
       if ngx.status == 404 then
-        -- set Location header and send a 302
         ngx.header["Location"] = "https://www.google.com"
-        ngx.status = ngx.HTTP_MOVED_TEMPORARILY
-        -- exit with the new status so Nginx sends the redirect
-        return ngx.exit(ngx.status)
+        ngx.status = 302
+        return ngx.exit(302)
       end
     end
 
