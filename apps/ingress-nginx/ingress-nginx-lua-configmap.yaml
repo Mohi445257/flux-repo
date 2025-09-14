@@ -4,7 +4,7 @@ metadata:
   name: ingress-nginx-lua-plugins
   namespace: ingress-nginx
 data:
-  redirect_404.lua: |
+  main.lua: |
     -- Custom plugin to redirect all 404 responses to Google
     local _M = {}
 
