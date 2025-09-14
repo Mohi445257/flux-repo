@@ -5,4 +5,4 @@ resources:
   - helmrelease-kube-prometheus-stack.yaml
   - helmrelease-loki.yaml
   - helmrelease-promtail.yaml
-  - dashboards/
+  - dashboards
