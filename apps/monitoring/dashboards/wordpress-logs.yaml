@@ -1,24 +1,21 @@
-apiVersion: v1
-kind: ConfigMap
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
 metadata:
-  name: wordpress-logs-dashboard
+  name: wordpress-logs
   namespace: monitoring
-  labels:
-    grafana_dashboard: "1"
-data:
-  wordpress-logs.json: |
+spec:
+  json: |
     {
       "id": null,
       "title": "WordPress Logs",
-      "tags": [ "wordpress", "logs" ],
+      "tags": ["wordpress", "logs"],
       "timezone": "browser",
       "schemaVersion": 16,
       "version": 1,
-      "refresh": "5s",
       "panels": [
         {
+          "title": "Nginx / WordPress Error Logs",
           "type": "logs",
-          "title": "WordPress Access Logs",
           "targets": [
             {
               "expr": "{app=\"wordpress\"}"
