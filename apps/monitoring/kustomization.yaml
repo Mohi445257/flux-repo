@@ -5,6 +5,7 @@ resources:
   - helmrelease-kube-prometheus-stack.yaml
   - helmrelease-loki.yaml
   - helmrelease-promtail.yaml
+  - helmrelease-grafana-operator.yaml
   - ingress-grafana.yaml
+  - datasource-loki.yaml
   - dashboards
-  - grafana-datasource-loki.yaml
