@@ -6,4 +6,4 @@ resources:
   - helmrelease-loki.yaml
   - helmrelease-promtail.yaml
   - ingress-grafana.yaml
-  - dashboards
+  - dashboards/
