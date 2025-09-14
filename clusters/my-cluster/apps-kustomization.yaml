@@ -11,5 +11,5 @@ spec:
     kind: GitRepository
     name: flux-system
   dependsOn:
-    - name: monitoring-resources   # ensure monitoring stack is ready first
+    - name: monitoring-resources
   timeout: 2m
