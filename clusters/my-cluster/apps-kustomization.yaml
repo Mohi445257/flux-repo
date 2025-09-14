@@ -11,10 +11,5 @@ spec:
     kind: GitRepository
     name: flux-system
   dependsOn:
-    - name: monitoring-resources
-  wait: true
-  timeout: 5m
-  decryption:
-    provider: sops
-    secretRef:
-      name: sops-age
+    - name: monitoring-resources   # ensure monitoring stack is ready first
+  timeout: 2m
