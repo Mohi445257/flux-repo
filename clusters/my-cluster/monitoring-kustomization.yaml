@@ -4,7 +4,7 @@ metadata:
   name: monitoring
   namespace: flux-system
 spec:
-  interval: 10m
+  interval: 5m
   path: ./apps/monitoring
   prune: true
   sourceRef:

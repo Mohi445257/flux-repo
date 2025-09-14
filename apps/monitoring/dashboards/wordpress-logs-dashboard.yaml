@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wordpress-logs-dashboard
+  namespace: monitoring
+  labels:
+    grafana_dashboard: "1"
+data:
+  wordpress-logs.json: |
+    # Paste the complete contents of apps/monitoring/dashboards/wordpress-logs.json here.
+    # If the file is already in the repo, you can reference it in the dashboards kustomization.
