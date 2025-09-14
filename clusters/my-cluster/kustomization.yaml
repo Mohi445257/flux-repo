@@ -1,14 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  # Core Flux system components
-  - flux-system/
-
-  # Helm repositories (required before monitoring/apps)
   - helm-repositories-kustomization.yaml
-
-  # Monitoring stack (dependsOn: helm-repositories)
-  - monitoring-kustomization.yaml
-
-  # Application stack (dependsOn: monitoring)
+  - monitoring-operator-kustomization.yaml
+  - monitoring-resources-kustomization.yaml
   - apps-kustomization.yaml
+  - metallb-kustomizations.yaml
+
