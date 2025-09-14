@@ -4,26 +4,27 @@ metadata:
   name: ingress-nginx
   namespace: ingress-nginx
 spec:
+  releaseName: ingress-nginx
   interval: 5m
   chart:
     spec:
       chart: ingress-nginx
-      version: 4.10.1
+      version: 4.11.7
       sourceRef:
         kind: HelmRepository
         name: ingress-nginx
         namespace: flux-system
   values:
     controller:
-      replicaCount: 1
       service:
         type: LoadBalancer
+      config:
+        lua-shared-dicts: "cache:10m"
+        plugins: "redirect-404"
       extraVolumes:
-        - name: redirect-404-plugin
+        - name: lua-plugins
           configMap:
-            name: ingress-nginx-lua-configmap
+            name: ingress-nginx-lua-plugins
       extraVolumeMounts:
-        - name: redirect-404-plugin
-          mountPath: /etc/nginx/lua/plugins/redirect-404-plugin/handler.lua
-          subPath: handler.lua
-          readOnly: true
+        - name: lua-plugins
+          mountPath: /etc/nginx/lua/plugins

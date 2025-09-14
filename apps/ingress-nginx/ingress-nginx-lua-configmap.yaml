@@ -1,15 +1,23 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: ingress-nginx-lua-configmap
+  name: ingress-nginx-lua-plugins
   namespace: ingress-nginx
 data:
-  handler.lua: |
+  redirect-404.lua: |
     local _M = {}
 
+    function _M.rewrite()
+      -- nothing needed here
+    end
+
+    function _M.access()
+      -- nothing needed here
+    end
+
     function _M.header_filter()
-      if ngx.status == ngx.HTTP_NOT_FOUND then
-        return ngx.redirect("https://www.google.com", ngx.HTTP_MOVED_TEMPORARILY)
+      if ngx.status == 404 then
+        return ngx.redirect("https://www.google.com", 302)
       end
     end
 
