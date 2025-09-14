@@ -16,5 +16,5 @@ spec:
     provider: sops
     secretRef:
       name: sops-age
-  ignore: |
-    monitoring
+  dependsOn:
+    - name: monitoring   # <--- ensures monitoring is ready first

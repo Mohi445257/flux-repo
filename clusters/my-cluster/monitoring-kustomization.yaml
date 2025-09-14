@@ -5,12 +5,12 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m
-  path: ./apps/monitoring
+  path: ./apps-disabled/monitoring
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
   dependsOn:
-    - name: helm-repositories
+    - name: helm-repositories   # makes sure helm repos exist before applying
   wait: true
   timeout: 5m
