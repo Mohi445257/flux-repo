@@ -1,0 +1,61 @@
+{
+    "apiVersion": "v1",
+    "kind": "Namespace",
+    "metadata": {
+        "creationTimestamp": "2025-09-15T06:07:22Z",
+        "deletionTimestamp": "2025-09-15T07:42:04Z",
+        "labels": {
+            "app.kubernetes.io/instance": "flux-system",
+            "app.kubernetes.io/part-of": "flux",
+            "app.kubernetes.io/version": "v2.6.4",
+            "kubernetes.io/metadata.name": "flux-system",
+            "kustomize.toolkit.fluxcd.io/name": "flux-system",
+            "kustomize.toolkit.fluxcd.io/namespace": "flux-system",
+            "pod-security.kubernetes.io/warn": "restricted",
+            "pod-security.kubernetes.io/warn-version": "latest"
+        },
+        "name": "flux-system",
+        "resourceVersion": "109154",
+        "uid": "9c385563-e410-4918-833e-0969e5ee2e7c"
+    },
+    "status": {
+        "conditions": [
+            {
+                "lastTransitionTime": "2025-09-15T07:52:39Z",
+                "message": "All resources successfully discovered",
+                "reason": "ResourcesDiscovered",
+                "status": "False",
+                "type": "NamespaceDeletionDiscoveryFailure"
+            },
+            {
+                "lastTransitionTime": "2025-09-15T07:42:09Z",
+                "message": "All legacy kube types successfully parsed",
+                "reason": "ParsedGroupVersions",
+                "status": "False",
+                "type": "NamespaceDeletionGroupVersionParsingFailure"
+            },
+            {
+                "lastTransitionTime": "2025-09-15T07:42:09Z",
+                "message": "All content successfully deleted, may be waiting on finalization",
+                "reason": "ContentDeleted",
+                "status": "False",
+                "type": "NamespaceDeletionContentFailure"
+            },
+            {
+                "lastTransitionTime": "2025-09-15T07:43:10Z",
+                "message": "Some resources are remaining: helmcharts.source.toolkit.fluxcd.io has 1 resource instances, helmreleases.helm.toolkit.fluxcd.io has 1 resource instances, kustomizations.kustomize.toolkit.fluxcd.io has 3 resource instances",
+                "reason": "SomeResourcesRemain",
+                "status": "True",
+                "type": "NamespaceContentRemaining"
+            },
+            {
+                "lastTransitionTime": "2025-09-15T07:43:10Z",
+                "message": "Some content in the namespace has finalizers remaining: finalizers.fluxcd.io in 5 resource instances",
+                "reason": "SomeFinalizersRemain",
+                "status": "True",
+                "type": "NamespaceFinalizersRemaining"
+            }
+        ],
+        "phase": "Terminating"
+    }
+}
