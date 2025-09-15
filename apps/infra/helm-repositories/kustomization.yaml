@@ -1,10 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-metadata:
-  name: infra-helm-repos
-  namespace: flux-system
 resources:
-  - bitnami-helmrepo.yaml
-  - grafana-helmrepo.yaml
-  - ingress-nginx-helmrepo.yaml
-  - prometheus-community-helmrepo.yaml
+- ingress-nginx-helmrepo.yaml
+- bitnami-helmrepo.yaml
+- grafana-helmrepo.yaml
+- prometheus-community-helmrepo.yaml
